@@ -1,3 +1,13 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>ota",
+  ":Telescope terraform_doc full_name=hashicorp/azurerm<cr>",
+  { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>otr",
+  ":Telescope terraform_doc full_name=hashicorp/azuread<cr>",
+  { noremap = true, silent = true }
+)
