@@ -5,12 +5,13 @@ return {
   } },
 
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {
-    transparent_mode = true,
+    transparent_mode = false,
   } },
+  { "rose-pine/neovim", name = "rose-pine" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "monokai-pro",
+      colorscheme = "rose-pine",
     },
   },
 }
