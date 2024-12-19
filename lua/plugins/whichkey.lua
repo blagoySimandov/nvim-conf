@@ -1,6 +1,7 @@
 return {
   "folke/which-key.nvim",
   opts = {
+    preset = "classic",
     spec = {
       { "<leader>o", group = "open" },
       { "<leader>ot", group = "terraform" },
