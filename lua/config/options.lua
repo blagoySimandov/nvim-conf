@@ -4,3 +4,5 @@
 --
 vim.g.root_spec = { "cwd" }
 vim.g.snacks_animate = false
+
+vim.cmd("command! SetCwd tcd %:p:h")
