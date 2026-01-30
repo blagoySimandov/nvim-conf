@@ -25,7 +25,7 @@ end
 
 return {
   { "loctvl842/monokai-pro.nvim", opts = {
-    filter = "machine",
+    filter = "octagon",
     transparent_background = false,
   } },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {
@@ -67,9 +67,20 @@ return {
   { "savq/melange-nvim" },
   { "sainnhe/sonokai" },
   {
+    "ribru17/bamboo.nvim",
+    lazy = false,
+    priority = 1000,
+    -- config = function()
+    --   require("bamboo").setup({
+    --     -- optional configuration here
+    --   })
+    --   require("bamboo").load()
+    -- end,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfox",
+      colorscheme = "catppuccin",
     },
   },
 }
