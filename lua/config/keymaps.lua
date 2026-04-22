@@ -1,22 +1,11 @@
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>ota",
-  ":Telescope terraform_doc full_name=hashicorp/azurerm<cr>",
-  { noremap = true, silent = true }
-)
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>otr",
-  ":Telescope terraform_doc full_name=hashicorp/azuread<cr>",
-  { noremap = true, silent = true }
-)
-
-vim.api.nvim_set_keymap("n", "<leader>otd", ":Telescope terraform_doc<cr>", { noremap = true, silent = true })
-
--- Clsoe left window
 local map = vim.keymap.set
+local fzf = require("fzf-lua")
 
+-- =========================
+-- Window Management
+-- =========================
+
+-- Close left window
 map("n", "<leader>wh", function()
   local win = vim.fn.winnr()
   vim.cmd("wincmd h")
@@ -27,10 +16,10 @@ map("n", "<leader>wh", function()
   end
 end, { desc = "Close left window" })
 
--- Close the window below
+-- Close window below
 map("n", "<leader>wb", function()
   local win = vim.fn.winnr()
-  vim.cmd("wincmd j") -- go down
+  vim.cmd("wincmd j")
   if vim.fn.winnr() ~= win then
     vim.cmd("close")
   else
@@ -38,38 +27,66 @@ map("n", "<leader>wb", function()
   end
 end, { desc = "Close bottom window" })
 
---TELESCOPE SYMBOL SEARCH VIA TREESITTER
-local telescope = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ss", telescope.treesitter, { desc = "Goto Symbol (TreeSitter)" })
+-- =========================
+-- Symbol Search (fzf-lua)
+-- =========================
 
--- for global search use lsp since treesitter is per buffer
-vim.keymap.set(
-  "n",
-  "<leader>sS",
-  require("telescope.builtin").lsp_workspace_symbols,
-  { desc = "Goto Symbol (Workspace)" }
-)
+-- TreeSitter symbols (current buffer)
+-- map("n", "<leader>ss", function()
+--   fzf.treesitter()
+-- end, { desc = "Goto Symbol (TreeSitter)" })
 
-vim.keymap.set("n", "<leader>ac", "<cmd>CodeCompanionChat<cr>", { desc = "CodeCompanion Chat" })
-vim.keymap.set("n", "<leader>aa", "<cmd>CodeCompanionActions<cr>", { desc = "CodeCompanion Actions" })
+-- Workspace symbols (LSP)
+map("n", "<leader>sS", function()
+  -- fzf.lsp_workspace_symbols()
+  fzf.lsp_live_workspace_symbols()
+end, { desc = "Workspace Symbols" })
 
-map("v", "<leader>ac", function()
-  vim.cmd("CodeCompanionChat")
-end, { desc = "Code Companion Chat (selected)", silent = true })
+-- If you prefer live dynamic filtering instead:
 
+-- =========================
+-- File Search
+-- =========================
+
+local function files_expand(level)
+  level = level or 0
+  local base = vim.fn.expand("%:p:h")
+
+  for _ = 1, level do
+    base = vim.fn.fnamemodify(base, ":h")
+  end
+
+  fzf.files({
+    cwd = base,
+    prompt = "Files (level " .. level .. "): ",
+    actions = {
+      -- go up one level
+      ["ctrl-h"] = function(_, _)
+        files_expand(level + 1)
+      end,
+      -- go back down one level
+      ["ctrl-l"] = function(_, _)
+        if level > 0 then
+          files_expand(level - 1)
+        else
+          files_expand(0)
+        end
+      end,
+    },
+  })
+end
+
+map("n", "<leader>ff", function()
+  files_expand(0)
+end, { desc = "Find files (C-h expand, C-l shrink)" })
+
+-- =========================
+-- Optional: Terminal ESC fix
+-- =========================
 -- vim.api.nvim_create_autocmd("TermOpen", {
 --   pattern = "*",
 --   callback = function()
 --     local opts = { buffer = 0, noremap = true, silent = true }
---
---     -- One press of <Esc> exits terminal mode
 --     vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
 --   end,
 -- })
---
---
---
--- -- Workspace symbol search with Telescope in LazyVim
-vim.keymap.set("n", "<leader>sS", function()
-  require("telescope.builtin").lsp_dynamic_workspace_symbols()
-end, { desc = "Live Workspace Symbol Search" })

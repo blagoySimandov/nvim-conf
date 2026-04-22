@@ -18,6 +18,7 @@ return {
 
     config.defaults.keymap.fzf["tab"] = "down"
     config.defaults.keymap.fzf["shift-tab"] = "up"
+    config.defaults.files.hidden = false
     --# mark for qf
     config.defaults.keymap.fzf["ctrl-space"] = "toggle+down"
 
@@ -74,7 +75,7 @@ return {
       -- Custom LazyVim option to configure vim.ui.select
       ui_select = function(fzf_opts, items)
         return vim.tbl_deep_extend("force", fzf_opts, {
-          prompt = " ",
+          prompt = " ",
           winopts = {
             title = " " .. vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", "")) .. " ",
             title_pos = "center",
@@ -103,7 +104,6 @@ return {
         })
       end,
 
-      -- THIS IS THE MODIFIED SECTION
       winopts = {
         width = 0.8,
         height = 0.8,
@@ -115,10 +115,10 @@ return {
           vertical = "up:45%",
         },
       },
-      -- END MODIFIED SECTION
 
       files = {
         cwd_prompt = false,
+        cmd = "fd --type f",
         actions = {
           ["alt-i"] = { actions.toggle_ignore },
           ["alt-h"] = { actions.toggle_hidden },
@@ -151,7 +151,7 @@ return {
       -- use the same prompt for all pickers for profile `default-title` and
       -- profiles that use `default-title` as base profile
       local function fix(t)
-        t.prompt = t.prompt ~= nil and " " or nil
+        t.prompt = t.prompt ~= nil and " " or nil
         for _, v in pairs(t) do
           if type(v) == "table" then
             fix(v)

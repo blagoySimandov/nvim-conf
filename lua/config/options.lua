@@ -5,4 +5,9 @@
 vim.g.root_spec = { "cwd" }
 vim.g.snacks_animate = false
 
+-- Clancy's java shitty fmt
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+
 vim.cmd("command! SetCwd tcd %:p:h")

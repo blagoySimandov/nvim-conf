@@ -25,7 +25,7 @@ end
 
 return {
   { "loctvl842/monokai-pro.nvim", opts = {
-    filter = "octagon",
+    filter = "classic",
     transparent_background = false,
   } },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {
@@ -52,15 +52,15 @@ return {
     end,
   },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = {
-    flavour = "mocha",
+    flavour = "frappe",
   } },
   {
     "folke/tokyonight.nvim",
     name = "tokyonight",
     opts = {
       style = "night",
-      colors = tokyocolors,
-      transparent = true,
+      --colors = tokyocolors,
+      --transparent = true,
     },
   },
   { "rebelot/kanagawa.nvim", name = "kanagawa" },
