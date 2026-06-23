@@ -6,5 +6,12 @@ return {
         return true
       end,
     },
+    servers = {
+      ruff = {
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+        end,
+      },
+    },
   },
 }
