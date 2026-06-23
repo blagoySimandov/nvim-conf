@@ -1,1 +1,1 @@
-return { "mogelbrod/vim-jsonpath" }
+return { "mogelbrod/vim-jsonpath", ft = "json" }
