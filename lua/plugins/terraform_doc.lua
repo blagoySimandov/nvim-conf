@@ -1,6 +1,7 @@
 return {
   {
     "ANGkeith/telescope-terraform-doc.nvim",
+    cmd = "Telescope terraform_doc",
     dependencies = {
       "nvim-telescope/telescope.nvim",
     },

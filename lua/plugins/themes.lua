@@ -24,16 +24,16 @@ local function tokyocolors(colors)
 end
 
 return {
-  { "loctvl842/monokai-pro.nvim", opts = {
+  { "loctvl842/monokai-pro.nvim", lazy = true, opts = {
     filter = "classic",
     transparent_background = false,
   } },
-  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {
+  { "ellisonleao/gruvbox.nvim", lazy = true, priority = 1000, config = true, opts = {
     transparent_mode = false,
   } },
   { "rose-pine/neovim", name = "rose-pine" },
-  { "EdenEast/nightfox.nvim", name = "nightfox" },
-  { "aktersnurra/no-clown-fiesta.nvim" },
+  { "EdenEast/nightfox.nvim", lazy = true, name = "nightfox" },
+  { "aktersnurra/no-clown-fiesta.nvim", lazy = true },
   {
     "scottmckendry/cyberdream.nvim",
     lazy = true,
@@ -51,11 +51,12 @@ return {
       vim.cmd([[ colorscheme NeoSolarized ]])
     end,
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = {
+  { "catppuccin/nvim", lazy = true, name = "catppuccin", priority = 1000, opts = {
     flavour = "frappe",
   } },
   {
     "folke/tokyonight.nvim",
+    lazy = true,
     name = "tokyonight",
     opts = {
       style = "night",
@@ -63,12 +64,12 @@ return {
       --transparent = true,
     },
   },
-  { "rebelot/kanagawa.nvim", name = "kanagawa" },
-  { "savq/melange-nvim" },
-  { "sainnhe/sonokai" },
+  { "rebelot/kanagawa.nvim", lazy = true, name = "kanagawa" },
+  { "savq/melange-nvim", lazy = true },
+  { "sainnhe/sonokai", lazy = true },
   {
     "ribru17/bamboo.nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
     -- config = function()
     --   require("bamboo").setup({
