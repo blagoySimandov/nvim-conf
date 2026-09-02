@@ -1,5 +1,9 @@
 local map = vim.keymap.set
-local fzf = require("fzf-lua")
+local fzf ---@type table?
+local function get_fzf()
+  if not fzf then fzf = require("fzf-lua") end
+  return fzf
+end
 
 -- =========================
 -- Window Management
@@ -39,7 +43,7 @@ end, { desc = "Close bottom window" })
 -- Workspace symbols (LSP)
 map("n", "<leader>sS", function()
   -- fzf.lsp_workspace_symbols()
-  fzf.lsp_live_workspace_symbols()
+  get_fzf().lsp_live_workspace_symbols()
 end, { desc = "Workspace Symbols" })
 
 -- If you prefer live dynamic filtering instead:
@@ -56,7 +60,7 @@ local function files_expand(level)
     base = vim.fn.fnamemodify(base, ":h")
   end
 
-  fzf.files({
+  get_fzf().files({
     cwd = base,
     prompt = "Files (level " .. level .. "): ",
     actions = {
