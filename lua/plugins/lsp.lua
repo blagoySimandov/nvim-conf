@@ -16,6 +16,8 @@ return {
           client.server_capabilities.documentFormattingProvider = false
         end,
       },
+      vhdl_ls = {},
+      denols = { mason = false },
     },
   },
 }
