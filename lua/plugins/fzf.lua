@@ -120,14 +120,14 @@ return {
         cwd_prompt = false,
         cmd = "fd --type f",
         actions = {
-          ["alt-i"] = { actions.toggle_ignore },
-          ["alt-h"] = { actions.toggle_hidden },
+          ["ctrl-y"] = { actions.toggle_ignore },
+          ["ctrl-g"] = { actions.toggle_hidden },
         },
       },
       grep = {
         actions = {
-          ["alt-i"] = { actions.toggle_ignore },
-          ["alt-h"] = { actions.toggle_hidden },
+          ["ctrl-y"] = { actions.toggle_ignore },
+          ["ctrl-g"] = { actions.toggle_hidden },
         },
       },
       lsp = {

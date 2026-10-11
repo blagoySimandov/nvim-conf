@@ -1,7 +1,10 @@
 local map = vim.keymap.set
 local fzf ---@type table?
 local function get_fzf()
-  if not fzf then fzf = require("fzf-lua") end
+  if not fzf then
+    require("lazy").load({ plugins = { "fzf-lua" } })
+    fzf = require("fzf-lua")
+  end
   return fzf
 end
 

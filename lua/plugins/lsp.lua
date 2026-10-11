@@ -9,7 +9,7 @@ return {
     },
     servers = {
       gopls = {
-        cmd = { "gopls", "-remote=auto" },
+        cmd = { "gopls" },
       },
       ruff = {
         on_attach = function(client)
